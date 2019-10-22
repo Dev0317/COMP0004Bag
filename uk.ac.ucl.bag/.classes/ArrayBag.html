@@ -1,0 +1,352 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ArrayBag</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">uk.ac.ucl.bag</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ArrayBag (uk.ac.ucl.bag)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrayBag</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (13/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.2%
+  </span>
+  <span class="absValue">
+    (45/ 51)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ArrayBag$ArrayBagIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/ 14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ArrayBag$ArrayBagUniqueIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ArrayBag$Element</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/ 11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85.2%
+  </span>
+  <span class="absValue">
+    (23/ 27)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.7%
+  </span>
+  <span class="absValue">
+    (71/ 81)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package uk.ac.ucl.bag;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Comparator;
+<i>4</i>&nbsp;import java.util.Iterator;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.Objects;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/*
+<i>9</i>&nbsp;   This class implements Bags using an ArrayList as the internal data structure.
+<i>10</i>&nbsp;   It is implemented as a JavaBeans component @see AbstractBag.java
+<i>11</i>&nbsp;*/
+<i>12</i>&nbsp;public class ArrayBag&lt;T&gt; extends AbstractBag&lt;T&gt; {
+<i>13</i>&nbsp;  /*
+<i>14</i>&nbsp;     Objects of class Element store a value and its occurrence count. It is implemented as a JavaBeans component
+<i>15</i>&nbsp;     @see AbstractBag.java. Note that the class is static (nested top level class) and does not have access to the scope
+<i>16</i>&nbsp;     of class ArrayBag even though it is nested inside the class. This means that the type variable
+<i>17</i>&nbsp;     T is not in scope, so class Element has to be declared using a different type variable E.
+<i>18</i>&nbsp;  */
+<i>19</i>&nbsp;  public static class Element&lt;E&gt; {
+<i>20</i>&nbsp;    public int count;
+<i>21</i>&nbsp;    public E value;
+<b class="fc"><i>22</i>&nbsp;    public Element(int count, E value) {</b>
+<b class="fc"><i>23</i>&nbsp;      this.count = count;</b>
+<b class="fc"><i>24</i>&nbsp;      this.value = value;</b>
+<b class="fc"><i>25</i>&nbsp;    }</b>
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;    public Element() {}</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public int getCount() {
+<b class="fc"><i>30</i>&nbsp;      return count;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public void setCount(int count) {
+<b class="nc"><i>34</i>&nbsp;      this.count = count;</b>
+<b class="nc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public E getValue() {
+<b class="fc"><i>38</i>&nbsp;      return value;</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    public void setValue(E value) {
+<b class="nc"><i>42</i>&nbsp;      this.value = value;</b>
+<b class="nc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;  }
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;  private int maxSize;
+<i>47</i>&nbsp;  private ArrayList&lt;Element&lt;T&gt;&gt; contents;
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;  public ArrayBag() throws BagException {
+<b class="fc"><i>50</i>&nbsp;    this(MAX_SIZE, Comparator.comparing(Objects::hashCode));</b>
+<b class="fc"><i>51</i>&nbsp;  }</b>
+<i>52</i>&nbsp;
+<b class="fc"><i>53</i>&nbsp;  public ArrayBag(int maxSize, Comparator&lt;T&gt; orderRelation) throws BagException {</b>
+<b class="fc"><i>54</i>&nbsp;    if (maxSize &gt; MAX_SIZE) {</b>
+<b class="nc"><i>55</i>&nbsp;      throw new BagException(&quot;Attempting to create a Bag with size greater than maximum&quot;);</b>
+<i>56</i>&nbsp;    }
+<b class="fc"><i>57</i>&nbsp;    if (maxSize &lt; 1) {</b>
+<b class="nc"><i>58</i>&nbsp;      throw new BagException(&quot;Attempting to create a Bag with size less than 1&quot;);</b>
+<i>59</i>&nbsp;    }
+<b class="fc"><i>60</i>&nbsp;    this.maxSize = maxSize;</b>
+<b class="fc"><i>61</i>&nbsp;    contents = new ArrayList&lt;&gt;();</b>
+<b class="fc"><i>62</i>&nbsp;    this.orderRelation = orderRelation;</b>
+<b class="fc"><i>63</i>&nbsp;  }</b>
+<i>64</i>&nbsp;
+<i>65</i>&nbsp;  public int getMaxSize() {
+<b class="fc"><i>66</i>&nbsp;    return maxSize;</b>
+<i>67</i>&nbsp;  }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;  public void setMaxSize(int maxSize) {
+<b class="nc"><i>70</i>&nbsp;    this.maxSize = maxSize;</b>
+<b class="nc"><i>71</i>&nbsp;  }</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;  public ArrayList&lt;Element&lt;T&gt;&gt; getContents() {
+<b class="fc"><i>74</i>&nbsp;    return contents;</b>
+<i>75</i>&nbsp;  }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;  public void setContents(ArrayList&lt;Element&lt;T&gt;&gt; contents) {
+<b class="nc"><i>78</i>&nbsp;    this.contents = contents;</b>
+<b class="nc"><i>79</i>&nbsp;  }</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;  public void add(T value) throws BagException {
+<b class="fc"><i>82</i>&nbsp;    for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>83</i>&nbsp;      if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>84</i>&nbsp;        element.count++;</b>
+<b class="fc"><i>85</i>&nbsp;        return;</b>
+<i>86</i>&nbsp;      }
+<b class="fc"><i>87</i>&nbsp;    }</b>
+<b class="fc"><i>88</i>&nbsp;    if (contents.size() &lt; maxSize) {</b>
+<b class="fc"><i>89</i>&nbsp;      contents.add(new Element&lt;&gt;(1,value));</b>
+<i>90</i>&nbsp;    } else {
+<b class="fc"><i>91</i>&nbsp;      throw new BagException(&quot;Bag is full&quot;);</b>
+<i>92</i>&nbsp;    }
+<b class="fc"><i>93</i>&nbsp;  }</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;  public void addWithOccurrences(T value, int occurrences) throws BagException {
+<b class="fc"><i>96</i>&nbsp;    for (int i = 0 ; i &lt; occurrences ; i++) {</b>
+<b class="fc"><i>97</i>&nbsp;      add(value);</b>
+<i>98</i>&nbsp;    }
+<b class="fc"><i>99</i>&nbsp;  }</b>
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;  public boolean contains(T value) {
+<b class="fc"><i>102</i>&nbsp;    for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>103</i>&nbsp;      if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>104</i>&nbsp;        return true;</b>
+<i>105</i>&nbsp;      }
+<b class="fc"><i>106</i>&nbsp;    }</b>
+<b class="fc"><i>107</i>&nbsp;    return false;</b>
+<i>108</i>&nbsp;  }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;  public int countOf(T value) {
+<b class="fc"><i>111</i>&nbsp;    for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>112</i>&nbsp;      if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>113</i>&nbsp;        return element.count;</b>
+<i>114</i>&nbsp;      }
+<b class="fc"><i>115</i>&nbsp;    }</b>
+<b class="fc"><i>116</i>&nbsp;    return 0; </b>
+<i>117</i>&nbsp;  }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;  public void remove(T value) {
+<b class="fc"><i>120</i>&nbsp;    for (int i = 0 ; i &lt; contents.size() ; i++) {</b>
+<b class="fc"><i>121</i>&nbsp;      Element&lt;T&gt; element = contents.get(i);</b>
+<b class="fc"><i>122</i>&nbsp;      if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>123</i>&nbsp;        element.count--;</b>
+<b class="fc"><i>124</i>&nbsp;        if (element.count == 0) {</b>
+<b class="fc"><i>125</i>&nbsp;          contents.remove(element);</b>
+<b class="fc"><i>126</i>&nbsp;          return;</b>
+<i>127</i>&nbsp;        }
+<i>128</i>&nbsp;      }
+<i>129</i>&nbsp;    }
+<b class="fc"><i>130</i>&nbsp;  }</b>
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;  public boolean isEmpty()
+<i>133</i>&nbsp;  {
+<b class="fc"><i>134</i>&nbsp;    return contents.size() == 0;</b>
+<i>135</i>&nbsp;  }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;  public int size()
+<i>138</i>&nbsp;  {
+<b class="fc"><i>139</i>&nbsp;    return contents.size();</b>
+<i>140</i>&nbsp;  }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;  /* This class implements the iterator interface to allow the unique values in ArrayBag objects to be iterated through.
+<i>143</i>&nbsp;   * The iterator returns each unique value without any copies (i.e., one value for each element in the
+<i>144</i>&nbsp;   * ArrayList data structure). Notice that this class is not declared static and is a nested inner class, which
+<i>145</i>&nbsp;   * does have access to the scope of the ArrayBag class, allowing it to access the ArrayList data structure
+<i>146</i>&nbsp;   * directly. The use of the static keyword when declaring nested classes makes an important difference.
+<i>147</i>&nbsp;   * The class is still private, though, and cannot be accessed outside the scope of the ArrayBag class.
+<i>148</i>&nbsp;   * However, a reference to an object of the class can be returned as a reference of type Iterator.
+<i>149</i>&nbsp;   */
+<b class="fc"><i>150</i>&nbsp;  private class ArrayBagUniqueIterator implements Iterator&lt;T&gt; {</b>
+<b class="fc"><i>151</i>&nbsp;    private int index = 0;</b>
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    public boolean hasNext() {
+<b class="fc"><i>154</i>&nbsp;      if (index &lt; contents.size()) return true;</b>
+<b class="fc"><i>155</i>&nbsp;      return false;</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public T next()
+<i>159</i>&nbsp;    {
+<b class="fc"><i>160</i>&nbsp;      return contents.get(index++).value;</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;  }
+<i>163</i>&nbsp;
+<i>164</i>&nbsp;  /*
+<i>165</i>&nbsp;    Return an iterator object. Code calling this method will get an object that behaves as an iterator but does not
+<i>166</i>&nbsp;    need to know the actual class of the object.
+<i>167</i>&nbsp;   */
+<i>168</i>&nbsp;  public Iterator&lt;T&gt; iterator()
+<i>169</i>&nbsp;  {
+<b class="fc"><i>170</i>&nbsp;    return new ArrayBagUniqueIterator();</b>
+<i>171</i>&nbsp;  }
+<i>172</i>&nbsp;
+<i>173</i>&nbsp;  /*
+<i>174</i>&nbsp;    This class implements an additional iterator that returns all values in a bag including a value for each copy.
+<i>175</i>&nbsp;    It is also a nested inner class.
+<i>176</i>&nbsp;   */
+<b class="fc"><i>177</i>&nbsp;  private class ArrayBagIterator implements Iterator&lt;T&gt; {</b>
+<b class="fc"><i>178</i>&nbsp;    private int index = 0;</b>
+<b class="fc"><i>179</i>&nbsp;    private int count = 0;</b>
+<i>180</i>&nbsp;    
+<i>181</i>&nbsp;    public boolean hasNext() {
+<b class="fc"><i>182</i>&nbsp;      if (index &lt; contents.size()) {</b>
+<b class="fc"><i>183</i>&nbsp;        if (count &lt; contents.get(index).count) return true;</b>
+<b class="fc"><i>184</i>&nbsp;        if ((count == contents.get(index).count) &amp;&amp; ((index + 1) &lt; contents.size())) return true;</b>
+<i>185</i>&nbsp;      }
+<b class="fc"><i>186</i>&nbsp;      return false;</b>
+<i>187</i>&nbsp;    }
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    public T next() {
+<b class="fc"><i>190</i>&nbsp;      if (count &lt; contents.get(index).count) {</b>
+<b class="fc"><i>191</i>&nbsp;        T value = contents.get(index).value;</b>
+<b class="fc"><i>192</i>&nbsp;        count++;</b>
+<b class="fc"><i>193</i>&nbsp;        return value;</b>
+<i>194</i>&nbsp;      }
+<b class="fc"><i>195</i>&nbsp;      count = 1;</b>
+<b class="fc"><i>196</i>&nbsp;      index++;</b>
+<b class="fc"><i>197</i>&nbsp;      return contents.get(index).value;</b>
+<i>198</i>&nbsp;    }
+<i>199</i>&nbsp;  }
+<i>200</i>&nbsp;
+<i>201</i>&nbsp;  public Iterator&lt;T&gt; allOccurrencesIterator()
+<i>202</i>&nbsp;  {
+<b class="fc"><i>203</i>&nbsp;    return new ArrayBagIterator();</b>
+<i>204</i>&nbsp;  }
+<i>205</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-03-02 14:37</div>
+</div>
+</body>
+</html>

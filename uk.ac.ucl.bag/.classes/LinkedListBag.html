@@ -1,0 +1,519 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LinkedListBag</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">uk.ac.ucl.bag</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LinkedListBag (uk.ac.ucl.bag)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LinkedListBag</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (13/ 15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.7%
+  </span>
+  <span class="absValue">
+    (47/ 53)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">LinkedListBag$Element</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/ 11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LinkedListBag$LinkedList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/ 17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LinkedListBag$LinkedList$LinkedListIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90%
+  </span>
+  <span class="absValue">
+    (18/ 20)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LinkedListBag$LinkedList$Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (7/ 11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LinkedListBag$LinkedListBagIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/ 11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">LinkedListBag$LinkedListBagUniqueIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    86.7%
+  </span>
+  <span class="absValue">
+    (39/ 45)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.4%
+  </span>
+  <span class="absValue">
+    (111/ 127)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package uk.ac.ucl.bag;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Comparator;
+<i>4</i>&nbsp;import java.util.Iterator;
+<i>5</i>&nbsp;import java.util.Objects;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/*
+<i>8</i>&nbsp;   This class implements Bags using a LinkedList as the internal data structure.
+<i>9</i>&nbsp;   It is implemented as a JavaBeans component @see AbstractBag.java
+<i>10</i>&nbsp; */
+<i>11</i>&nbsp;public class LinkedListBag&lt;T&gt; extends AbstractBag&lt;T&gt; {
+<i>12</i>&nbsp;    /*
+<i>13</i>&nbsp;       Objects of class LinkedList store a linked list of Node objects that store a value and its
+<i>14</i>&nbsp;       occurrences. It is implemented as a JavaBeans component @see AbstractBag.java
+<i>15</i>&nbsp;       Note that the class is static (nested top level class) and does not have access to the scope
+<i>16</i>&nbsp;       of class ArrayBag even though it is nested inside the class. This means that the type variable
+<i>17</i>&nbsp;       T is not in scope, so class Element has to be declared using a different type variable U.
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    public static class LinkedList&lt;U&gt; implements Iterable&lt;U&gt; {
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;        public static class Node&lt;V&gt; {
+<i>23</i>&nbsp;            public V value;
+<i>24</i>&nbsp;            public Node&lt;V&gt; next;
+<i>25</i>&nbsp;
+<b class="fc"><i>26</i>&nbsp;            public Node(V value) {</b>
+<b class="fc"><i>27</i>&nbsp;                this.value = value;</b>
+<b class="fc"><i>28</i>&nbsp;                this.next = null;</b>
+<b class="fc"><i>29</i>&nbsp;            }</b>
+<i>30</i>&nbsp;
+<b class="fc"><i>31</i>&nbsp;            public Node() {}</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;            public V getValue() {
+<b class="fc"><i>34</i>&nbsp;                return value;</b>
+<i>35</i>&nbsp;            }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;            public void setValue(V value) {
+<b class="nc"><i>38</i>&nbsp;                this.value = value;</b>
+<b class="nc"><i>39</i>&nbsp;            }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;            public Node&lt;V&gt; getNext() {
+<b class="fc"><i>42</i>&nbsp;                return next;</b>
+<i>43</i>&nbsp;            }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;            public void setNext(Node&lt;V&gt; next) {
+<b class="nc"><i>46</i>&nbsp;                this.next = next;</b>
+<b class="nc"><i>47</i>&nbsp;            }</b>
+<i>48</i>&nbsp;        }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;        private Node&lt;U&gt; head;
+<i>51</i>&nbsp;        private int size;
+<i>52</i>&nbsp;
+<b class="fc"><i>53</i>&nbsp;        public LinkedList() {</b>
+<b class="fc"><i>54</i>&nbsp;            head = null;</b>
+<b class="fc"><i>55</i>&nbsp;            size = 0;</b>
+<b class="fc"><i>56</i>&nbsp;        }</b>
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;        public Node&lt;U&gt; getHead() {
+<b class="fc"><i>59</i>&nbsp;            return head;</b>
+<i>60</i>&nbsp;        }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;        public void setHead(Node&lt;U&gt; head) {
+<b class="fc"><i>63</i>&nbsp;            this.head = head;</b>
+<b class="fc"><i>64</i>&nbsp;        }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;        public int getSize() {
+<b class="fc"><i>67</i>&nbsp;            return size;</b>
+<i>68</i>&nbsp;        }
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;        public void setSize(int size) {
+<b class="fc"><i>71</i>&nbsp;            this.size = size;</b>
+<b class="fc"><i>72</i>&nbsp;        }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;        public void prepend(U e) {
+<b class="fc"><i>75</i>&nbsp;            Node&lt;U&gt; newNode = new Node&lt;&gt;(e);</b>
+<b class="fc"><i>76</i>&nbsp;            newNode.next = head;</b>
+<b class="fc"><i>77</i>&nbsp;            head = newNode;</b>
+<b class="fc"><i>78</i>&nbsp;            size++;</b>
+<b class="fc"><i>79</i>&nbsp;        }</b>
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;        public int size() {
+<b class="fc"><i>82</i>&nbsp;            return this.size;</b>
+<i>83</i>&nbsp;        }
+<i>84</i>&nbsp;
+<b class="fc"><i>85</i>&nbsp;        private class LinkedListIterator implements Iterator&lt;U&gt; {</b>
+<b class="fc"><i>86</i>&nbsp;            private LinkedList.Node&lt;U&gt; nextNode = head;</b>
+<b class="fc"><i>87</i>&nbsp;            private LinkedList.Node&lt;U&gt; curNode = null;</b>
+<b class="fc"><i>88</i>&nbsp;            private LinkedList.Node&lt;U&gt; prevNode = null;</b>
+<b class="fc"><i>89</i>&nbsp;            private boolean removedCurNode = false;</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;            public boolean hasNext() {
+<b class="fc"><i>92</i>&nbsp;                return nextNode != null;</b>
+<i>93</i>&nbsp;            }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;            public U next() {
+<b class="fc"><i>96</i>&nbsp;                prevNode = (removedCurNode)? prevNode : curNode;</b>
+<b class="fc"><i>97</i>&nbsp;                curNode = nextNode;</b>
+<b class="fc"><i>98</i>&nbsp;                removedCurNode = false;</b>
+<b class="fc"><i>99</i>&nbsp;                nextNode = nextNode.next;</b>
+<b class="fc"><i>100</i>&nbsp;                return curNode.value;</b>
+<i>101</i>&nbsp;            }
+<i>102</i>&nbsp;
+<i>103</i>&nbsp;            public void remove() {
+<b class="fc"><i>104</i>&nbsp;                if (curNode != null) {</b>
+<b class="fc"><i>105</i>&nbsp;                    if (prevNode == null) {</b>
+<b class="nc"><i>106</i>&nbsp;                        head = curNode.next;</b>
+<b class="nc"><i>107</i>&nbsp;                        curNode.next = null;</b>
+<i>108</i>&nbsp;                    } else {
+<b class="fc"><i>109</i>&nbsp;                        prevNode.next = curNode.next;</b>
+<b class="fc"><i>110</i>&nbsp;                        curNode.next = null;</b>
+<i>111</i>&nbsp;                    }
+<b class="fc"><i>112</i>&nbsp;                    removedCurNode = true;</b>
+<b class="fc"><i>113</i>&nbsp;                    size--;</b>
+<i>114</i>&nbsp;                }
+<b class="fc"><i>115</i>&nbsp;            }</b>
+<i>116</i>&nbsp;        }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;        /*
+<i>119</i>&nbsp;          Return an iterator object. Code calling this method will get an object that behaves as an iterator but does not
+<i>120</i>&nbsp;          need to know the actual class of the object.
+<i>121</i>&nbsp;         */
+<i>122</i>&nbsp;        public Iterator&lt;U&gt; iterator() {
+<b class="fc"><i>123</i>&nbsp;            return new LinkedListIterator();</b>
+<i>124</i>&nbsp;        }
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    /*
+<i>129</i>&nbsp;      Objects of class Element store a value and its occurrence count. It is implemented as a JavaBeans component
+<i>130</i>&nbsp;      @see AbstractBag.java. Note that the class is static (nested top level class) and does not have access to the scope        of class ArrayBag even though it is nested inside the class. This means that the type variable
+<i>131</i>&nbsp;      T is not in scope, so class Element has to be declared using a different type variable E.
+<i>132</i>&nbsp;    */
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public static class Element&lt;W&gt; {
+<i>135</i>&nbsp;        public int count;
+<i>136</i>&nbsp;        public W value;
+<i>137</i>&nbsp;
+<b class="fc"><i>138</i>&nbsp;        public Element(int count, W value) {</b>
+<b class="fc"><i>139</i>&nbsp;            this.count = count;</b>
+<b class="fc"><i>140</i>&nbsp;            this.value = value;</b>
+<b class="fc"><i>141</i>&nbsp;        }</b>
+<i>142</i>&nbsp;
+<b class="fc"><i>143</i>&nbsp;        public Element() {}</b>
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;        public int getCount() {
+<b class="fc"><i>146</i>&nbsp;            return count;</b>
+<i>147</i>&nbsp;        }
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;        public void setCount(int count) {
+<b class="nc"><i>150</i>&nbsp;            this.count = count;</b>
+<b class="nc"><i>151</i>&nbsp;        }</b>
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;        public W getValue() {
+<b class="fc"><i>154</i>&nbsp;            return value;</b>
+<i>155</i>&nbsp;        }
+<i>156</i>&nbsp;
+<i>157</i>&nbsp;        public void setValue(W value) {
+<b class="nc"><i>158</i>&nbsp;            this.value = value;</b>
+<b class="nc"><i>159</i>&nbsp;        }</b>
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    private int maxSize;
+<i>163</i>&nbsp;    private LinkedList&lt;Element&lt;T&gt;&gt; contents;
+<i>164</i>&nbsp;
+<i>165</i>&nbsp;    public LinkedListBag() throws BagException {
+<b class="fc"><i>166</i>&nbsp;        this(MAX_SIZE, Comparator.comparing(Objects::hashCode));</b>
+<b class="fc"><i>167</i>&nbsp;    }</b>
+<i>168</i>&nbsp;
+<b class="fc"><i>169</i>&nbsp;    public LinkedListBag(int maxSize, Comparator&lt;T&gt; orderRelation) throws BagException {</b>
+<b class="fc"><i>170</i>&nbsp;        if (maxSize &gt; MAX_SIZE) {</b>
+<b class="nc"><i>171</i>&nbsp;            throw new BagException(&quot;Attempting to create a Bag with size greater than maximum&quot;);</b>
+<i>172</i>&nbsp;        }
+<b class="fc"><i>173</i>&nbsp;        if (maxSize &lt; 1) {</b>
+<b class="nc"><i>174</i>&nbsp;            throw new BagException(&quot;Attempting to create a Bag with size less than 1&quot;);</b>
+<i>175</i>&nbsp;        }
+<b class="fc"><i>176</i>&nbsp;        this.maxSize = maxSize;</b>
+<b class="fc"><i>177</i>&nbsp;        contents = new LinkedList&lt;&gt;();</b>
+<b class="fc"><i>178</i>&nbsp;        this.orderRelation = orderRelation;</b>
+<b class="fc"><i>179</i>&nbsp;    }</b>
+<i>180</i>&nbsp;
+<i>181</i>&nbsp;    public int getMaxSize() {
+<b class="fc"><i>182</i>&nbsp;        return maxSize;</b>
+<i>183</i>&nbsp;    }
+<i>184</i>&nbsp;
+<i>185</i>&nbsp;    public void setMaxSize(int maxSize) {
+<b class="nc"><i>186</i>&nbsp;        this.maxSize = maxSize;</b>
+<b class="nc"><i>187</i>&nbsp;    }</b>
+<i>188</i>&nbsp;
+<i>189</i>&nbsp;    public LinkedList&lt;Element&lt;T&gt;&gt; getContents() {
+<b class="fc"><i>190</i>&nbsp;        return contents;</b>
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;
+<i>193</i>&nbsp;    public void setContents(LinkedList&lt;Element&lt;T&gt;&gt; contents) {
+<b class="nc"><i>194</i>&nbsp;        this.contents = contents;</b>
+<b class="nc"><i>195</i>&nbsp;    }</b>
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;    public void add(T value) throws BagException {
+<b class="fc"><i>198</i>&nbsp;        for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>199</i>&nbsp;            if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>200</i>&nbsp;                element.count++;</b>
+<b class="fc"><i>201</i>&nbsp;                return;</b>
+<i>202</i>&nbsp;            }
+<b class="fc"><i>203</i>&nbsp;        }</b>
+<b class="fc"><i>204</i>&nbsp;        if (contents.size() &lt; maxSize) {</b>
+<b class="fc"><i>205</i>&nbsp;            contents.prepend(new Element&lt;&gt;(1, value));</b>
+<i>206</i>&nbsp;        } else {
+<b class="fc"><i>207</i>&nbsp;            throw new BagException(&quot;Bag is full&quot;);</b>
+<i>208</i>&nbsp;        }
+<b class="fc"><i>209</i>&nbsp;    }</b>
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;    public void addWithOccurrences(T value, int occurrences) throws BagException {
+<b class="fc"><i>212</i>&nbsp;        for (int i = 0; i &lt; occurrences; i++) {</b>
+<b class="fc"><i>213</i>&nbsp;            add(value);</b>
+<i>214</i>&nbsp;        }
+<b class="fc"><i>215</i>&nbsp;    }</b>
+<i>216</i>&nbsp;
+<i>217</i>&nbsp;    public boolean contains(T value) {
+<b class="fc"><i>218</i>&nbsp;        for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>219</i>&nbsp;            if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>220</i>&nbsp;                return true;</b>
+<i>221</i>&nbsp;            }
+<b class="fc"><i>222</i>&nbsp;        }</b>
+<b class="fc"><i>223</i>&nbsp;        return false;</b>
+<i>224</i>&nbsp;    }
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;    public int countOf(T value) {
+<b class="fc"><i>227</i>&nbsp;        for (Element&lt;T&gt; element : contents) {</b>
+<b class="fc"><i>228</i>&nbsp;            if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>229</i>&nbsp;                return element.count;</b>
+<i>230</i>&nbsp;            }
+<b class="fc"><i>231</i>&nbsp;        }</b>
+<b class="fc"><i>232</i>&nbsp;        return 0;</b>
+<i>233</i>&nbsp;    }
+<i>234</i>&nbsp;
+<i>235</i>&nbsp;    public void remove(T value) {
+<b class="fc"><i>236</i>&nbsp;        Iterator&lt;Element&lt;T&gt;&gt; iterator = contents.iterator();</b>
+<i>237</i>&nbsp;
+<b class="fc"><i>238</i>&nbsp;        while (iterator.hasNext()) {</b>
+<b class="fc"><i>239</i>&nbsp;            Element&lt;T&gt; element = iterator.next();</b>
+<b class="fc"><i>240</i>&nbsp;            if (orderRelation.compare(element.value, value) == 0) {</b>
+<b class="fc"><i>241</i>&nbsp;                element.count--;</b>
+<b class="fc"><i>242</i>&nbsp;                if (element.count == 0) {</b>
+<b class="fc"><i>243</i>&nbsp;                    iterator.remove();</b>
+<b class="fc"><i>244</i>&nbsp;                    return;</b>
+<i>245</i>&nbsp;                }
+<i>246</i>&nbsp;            }
+<b class="fc"><i>247</i>&nbsp;        }</b>
+<b class="fc"><i>248</i>&nbsp;    }</b>
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;    public boolean isEmpty() {
+<b class="fc"><i>251</i>&nbsp;        return contents.size() == 0;</b>
+<i>252</i>&nbsp;    }
+<i>253</i>&nbsp;
+<i>254</i>&nbsp;    public int size() {
+<b class="fc"><i>255</i>&nbsp;        return contents.size();</b>
+<i>256</i>&nbsp;    }
+<i>257</i>&nbsp;
+<i>258</i>&nbsp;    /* This class implements the iterator interface to allow the unique values in LinkedList objects to be iterated through.
+<i>259</i>&nbsp;     * The iterator returns each unique value without any copies (i.e., one value for each element in the
+<i>260</i>&nbsp;     * LinkedList data structure). Notice that this class is not declared static and is a nested inner class, which
+<i>261</i>&nbsp;     * does have access to the scope of the LinkedListBag class, allowing it to access the LinkedList data structure
+<i>262</i>&nbsp;     * directly. The use of the static keyword when declaring nested classes makes an important difference.
+<i>263</i>&nbsp;     * The class is still private, though, and cannot be accessed outside the scope of the LinkedListBag class.
+<i>264</i>&nbsp;     * However, a reference to an object of the class can be returned as a reference of type Iterator.
+<i>265</i>&nbsp;     */
+<b class="fc"><i>266</i>&nbsp;    private class LinkedListBagUniqueIterator implements Iterator&lt;T&gt; {</b>
+<b class="fc"><i>267</i>&nbsp;        Iterator&lt;Element&lt;T&gt;&gt; iterator = contents.iterator();</b>
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;        public boolean hasNext() {
+<b class="fc"><i>270</i>&nbsp;            return iterator.hasNext();</b>
+<i>271</i>&nbsp;        }
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;        public T next() {
+<b class="fc"><i>274</i>&nbsp;            return iterator.next().value;</b>
+<i>275</i>&nbsp;        }
+<i>276</i>&nbsp;    }
+<i>277</i>&nbsp;
+<i>278</i>&nbsp;    /*
+<i>279</i>&nbsp;      Return an iterator object. Code calling this method will get an object that behaves as an iterator but does not
+<i>280</i>&nbsp;      need to know the actual class of the object, which is private anyway.
+<i>281</i>&nbsp;     */
+<i>282</i>&nbsp;    public Iterator&lt;T&gt; iterator() {
+<b class="fc"><i>283</i>&nbsp;        return new LinkedListBagUniqueIterator();</b>
+<i>284</i>&nbsp;    }
+<i>285</i>&nbsp;
+<i>286</i>&nbsp;    /*
+<i>287</i>&nbsp;      This class implements an additional iterator that returns all values in a bag including a value for each copy.
+<i>288</i>&nbsp;      It is also a nested inner class.
+<i>289</i>&nbsp;     */
+<b class="fc"><i>290</i>&nbsp;    private class LinkedListBagIterator implements Iterator&lt;T&gt; {</b>
+<b class="fc"><i>291</i>&nbsp;        Iterator&lt;Element&lt;T&gt;&gt; iterator = contents.iterator();</b>
+<b class="fc"><i>292</i>&nbsp;        Element&lt;T&gt; currentElement = iterator.next();</b>
+<b class="fc"><i>293</i>&nbsp;        int count = 0;</b>
+<i>294</i>&nbsp;
+<i>295</i>&nbsp;        public boolean hasNext()
+<i>296</i>&nbsp;        {
+<b class="fc"><i>297</i>&nbsp;            return count &lt; currentElement.count || iterator.hasNext();</b>
+<i>298</i>&nbsp;        }
+<i>299</i>&nbsp;
+<i>300</i>&nbsp;        public T next() {
+<b class="fc"><i>301</i>&nbsp;            if (count &lt; currentElement.count) {</b>
+<b class="fc"><i>302</i>&nbsp;                count++;</b>
+<b class="fc"><i>303</i>&nbsp;                return currentElement.value;</b>
+<i>304</i>&nbsp;            }
+<b class="fc"><i>305</i>&nbsp;            count = 1;</b>
+<b class="fc"><i>306</i>&nbsp;            currentElement = iterator.next();</b>
+<b class="fc"><i>307</i>&nbsp;            return currentElement.value;</b>
+<i>308</i>&nbsp;        }
+<i>309</i>&nbsp;    }
+<i>310</i>&nbsp;
+<i>311</i>&nbsp;    public Iterator&lt;T&gt; allOccurrencesIterator() {
+<b class="fc"><i>312</i>&nbsp;        return new LinkedListBagIterator();</b>
+<i>313</i>&nbsp;    }
+<i>314</i>&nbsp;}
+<i>315</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-03-02 14:37</div>
+</div>
+</body>
+</html>

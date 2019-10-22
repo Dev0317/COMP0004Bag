@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BagFactory</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">uk.ac.ucl.bag</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BagFactory (uk.ac.ucl.bag)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BagFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    63.6%
+  </span>
+  <span class="absValue">
+    (14/ 22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package uk.ac.ucl.bag;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.util.Comparator;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * A factory to create Bag objects. The class is implemented as a Singleton, such that only one factory
+<i>7</i>&nbsp; * object can be created. The factory can be configured with the name of the bag class it creates instances
+<i>8</i>&nbsp; * of.
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;public class BagFactory&lt;T&gt; {
+<b class="fc"><i>11</i>&nbsp;  private static BagFactory factory = null;</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;  /**
+<i>14</i>&nbsp;   * Return the single factory object, creating it if necessary.
+<i>15</i>&nbsp;   * @return a new instance of BagFactory
+<i>16</i>&nbsp;   */
+<i>17</i>&nbsp;  public static BagFactory getInstance() {
+<b class="fc"><i>18</i>&nbsp;    if (factory == null) factory = new BagFactory();</b>
+<b class="fc"><i>19</i>&nbsp;    return factory;</b>
+<i>20</i>&nbsp;  }
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;  // The name of the class that the factory will create objects of.
+<i>23</i>&nbsp;  private String bagClass;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;  // The constructor is private to prevent code in any other class creating an instance.
+<b class="fc"><i>26</i>&nbsp;  private BagFactory() {</b>
+<b class="fc"><i>27</i>&nbsp;  }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;  /**
+<i>30</i>&nbsp;   * Set the class that the factory creates instances of.
+<i>31</i>&nbsp;   * @param aClass the name of the class.
+<i>32</i>&nbsp;   */
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;  public void setBagClass(String aClass)
+<i>35</i>&nbsp;  {
+<b class="fc"><i>36</i>&nbsp;    bagClass = aClass;</b>
+<b class="fc"><i>37</i>&nbsp;  }</b>
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;  /**
+<i>40</i>&nbsp;   * Create a bag that is an instance of the class the factory has been set to create.
+<i>41</i>&nbsp;   * @return The new bag.
+<i>42</i>&nbsp;   * @throws BagException If the class is not recognised as one from
+<i>43</i>&nbsp;   * which a bag object can be created.
+<i>44</i>&nbsp;   */
+<i>45</i>&nbsp;  public Bag&lt;T&gt; getBag() throws BagException {
+<b class="nc"><i>46</i>&nbsp;    if (bagClass.equals(&quot;ArrayBag&quot;)) {</b>
+<b class="nc"><i>47</i>&nbsp;      return new ArrayBag&lt;&gt;();</b>
+<b class="nc"><i>48</i>&nbsp;    } else if (bagClass.equals(&quot;MapBag&quot;)) {</b>
+<b class="nc"><i>49</i>&nbsp;      return new MapBag&lt;&gt;();</b>
+<b class="nc"><i>50</i>&nbsp;    } else if (bagClass.equals(&quot;LinkedListBag&quot;)) {</b>
+<b class="nc"><i>51</i>&nbsp;      return new LinkedListBag&lt;&gt;();</b>
+<i>52</i>&nbsp;    }
+<b class="nc"><i>53</i>&nbsp;    throw new BagException</b>
+<i>54</i>&nbsp;            (&quot;Attempting to use BagFactory to create something that is not a Bag&quot;);
+<i>55</i>&nbsp;  }
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;  /**
+<i>58</i>&nbsp;   * Create a bag that is an instance of the class the factory has been set to create.
+<i>59</i>&nbsp;   * @param orderRelation allows the user to specify how comparison is done for the values
+<i>60</i>&nbsp;   * stored in a Bag
+<i>61</i>&nbsp;   * @return The new bag.
+<i>62</i>&nbsp;   * @throws BagException If the class is not recognised as one from
+<i>63</i>&nbsp;   * which a bag object can be created.
+<i>64</i>&nbsp;   */
+<i>65</i>&nbsp;  public Bag&lt;T&gt; getBag(Comparator&lt;T&gt; orderRelation) throws BagException {
+<b class="fc"><i>66</i>&nbsp;    return getBag(Bag.MAX_SIZE, orderRelation);</b>
+<i>67</i>&nbsp;  }
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;  /**
+<i>70</i>&nbsp;   * Create a bag that is an instance of the class the factory has been set to create, with the
+<i>71</i>&nbsp;   * given maximum bag size.
+<i>72</i>&nbsp;   * @param maxSize The maximum size of the new bag.
+<i>73</i>&nbsp;   * @param orderRelation allows the user to specify how comparison is done for the values
+<i>74</i>&nbsp;   * stored in a Bag
+<i>75</i>&nbsp;   * @return The new bag.
+<i>76</i>&nbsp;   * @throws BagException If the class is not recognised as one from
+<i>77</i>&nbsp;   * which a bag object can be created.
+<i>78</i>&nbsp;   */
+<i>79</i>&nbsp;  public Bag&lt;T&gt; getBag(int maxSize, Comparator&lt;T&gt; orderRelation) throws BagException {
+<b class="fc"><i>80</i>&nbsp;    if (bagClass.equals(&quot;ArrayBag&quot;)) {</b>
+<b class="fc"><i>81</i>&nbsp;      return new ArrayBag&lt;&gt;(maxSize, orderRelation);</b>
+<b class="fc"><i>82</i>&nbsp;    } else if (bagClass.equals(&quot;MapBag&quot;)) {</b>
+<b class="fc"><i>83</i>&nbsp;      return new MapBag&lt;&gt;(maxSize, orderRelation);</b>
+<b class="fc"><i>84</i>&nbsp;    } else if (bagClass.equals(&quot;LinkedListBag&quot;)) {</b>
+<b class="fc"><i>85</i>&nbsp;      return new LinkedListBag&lt;&gt;(maxSize, orderRelation);</b>
+<i>86</i>&nbsp;    }
+<b class="nc"><i>87</i>&nbsp;    throw new BagException</b>
+<i>88</i>&nbsp;      (&quot;Attempting to use BagFactory to create something that is not a Bag&quot;);
+<i>89</i>&nbsp;  }
+<i>90</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2019-03-02 14:37</div>
+</div>
+</body>
+</html>
